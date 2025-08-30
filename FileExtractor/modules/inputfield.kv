@@ -1,0 +1,81 @@
+#:kivy 2.1.0
+# modules/inputfield.kv
+
+<InputField>:
+    orientation:'vertical'
+    # spacing: 10
+    # padding: 10
+    # size_hint_y: None
+# Add an instance of your custom InputField widget.
+# We give it a fixed height so it doesn't stretch vertically.
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(25)
+
+        spacing: dp(8)
+
+        TextInput:
+            id: source_path
+            size_hint_y: None
+            height: dp(25)
+            text: root.source_path
+            hint_text: "Source Path"
+            multiline: False
+            readonly: True
+            padding: (5, 5, dp(5), 5)
+
+
+        Button:
+            text: "Browse Source"
+            on_press: root.browse_source()
+            size_hint_x: None
+            width: dp(120)
+            font_size: dp(12)
+
+    
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(25)
+        spacing: dp(8)
+
+
+        TextInput:
+            id: destination_path
+            size_hint_y: None
+            height: dp(25)
+            hint_text: "Destination Path"
+            text: root.dest_path
+            multiline: False
+            readonly: True
+
+        Button:
+            on_press: root.browse_dest()
+            text: "Browse Destination"
+            size_hint_x: None
+            width: dp(120)
+            font_size: dp(12)
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(25)
+        spacing: dp(8)
+
+
+        TextInput:
+            id: render_path
+            size_hint_y: None
+            height: dp(25)
+            hint_text: "Render Folder Path (ONLY FOR ONE SHOT)"
+            text: root.render_path
+            multiline: False
+            readonly: True
+
+        Button:
+            on_press: root.browse_render()
+            text: "Browse Render"
+            size_hint_x: None
+            width: dp(120)
+            font_size: dp(12)

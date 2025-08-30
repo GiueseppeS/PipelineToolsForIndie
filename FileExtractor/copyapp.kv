@@ -1,0 +1,99 @@
+# copyapp.kv
+
+# Rule for the main window container
+<MainLayout>:
+
+    color: 1 , 0 , 0 , 1
+    orientation: 'vertical'
+    spacing: dp(30)
+    anchor_y: 'top'
+
+    Label:
+        text:'Magic Copy'
+        font_size: dp(24)
+        bold: True
+
+        size_hint_y: None
+        height: dp(70)
+
+
+    InputField:
+        id: input_field
+        size_hint_y: None
+        padding: 10
+        spacing: 10
+
+    PatternBoxLayout:
+        id: pattern_box_layout_id
+
+    Button:
+        text: "Begin Batch Copy"
+        on_press: root.process_data()
+        size_hint_x: None
+        width: dp(200)
+        height: dp(90)
+        pos_hint: {"center_x": 0.5}
+
+    VersionWidget:
+
+    Widget:
+
+
+
+
+<PatternBoxLayout@BoxLayout>:
+    padding: 10
+    spacing: 10
+    orientation: 'horizontal'
+    height: dp(40)
+    size_hint_y: None
+    
+    Label:
+        text: "Shot Pattern"
+        font_size: dp(12)
+        size_hint_x: None
+        width: self.texture_size[0]
+
+    TextInput:
+        id: shot_pattern_id
+        hint_text: "e.g., Shot_0001"
+        width:dp(150)
+        size_hint_x: None
+        multiline: False
+
+
+
+<VersionWidget@FloatLayout>:
+
+    # The AnchorLayout sits on top and pins the version label to the corner
+    AnchorLayout:
+        anchor_x: 'right'
+        anchor_y: 'bottom'
+
+        Button:
+            text: "v0.1"
+            font_size: '10sp'
+            on_press: print("Button-Label was pressed!")
+            size_hint: None, None
+            padding: (dp(5), dp(5))
+            color: 1 ,1 , 1 , 0.5
+            size: self.texture_size
+            # Make the background invisible
+            background_color: (0, 0, 0, 0) # Transparent
+            background_normal: ''
+            background_down: ''
+
+
+<AboutPopup@Popup>:
+    title: 'About This App'
+    size_hint: 0.6, 0.4
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        Label:
+            text: 'My Live App'
+            font_size: '20sp'
+        Label:
+            text: 'Version 0.1'
+        Label:
+            text: '(c) 2025 Your Name'
