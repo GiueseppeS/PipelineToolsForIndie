@@ -5,39 +5,54 @@
 
     color: 1 , 0 , 0 , 1
     orientation: 'vertical'
-    spacing: dp(30)
-    anchor_y: 'top'
+    padding: 10
+    spacing: 30
 
     Label:
-        text:'Magic Copy'
+        text: 'Magic Copy'
         font_size: dp(24)
         bold: True
-
-        size_hint_y: None
-        height: dp(70)
-
+        valign: 'middle'
+        halign: 'center'
+        # --- Centering Properties ---
+        # 3. Bind the text's bounding box to the Label's full size
+        # --- Sizing Properties ---
+        text_size: self.size
+        height: [0, 0, 0, dp(50)][int(self.texture_size[1] > dp(40))]
 
     InputField:
         id: input_field
         size_hint_y: None
-        padding: 10
+        #padding: 10
         spacing: 10
+        #padding: dp(-10)
 
     PatternBoxLayout:
         id: pattern_box_layout_id
+    ProgressBar:
+        id: progress_bar
+        max: 100
+        value: 0
+        
+
+    Label:
+        id: progress_label
+        text: "Ready!"
+        font_size: dp(12)
 
     Button:
+        id: process_button
         text: "Begin Batch Copy"
         on_press: root.process_data()
         size_hint_x: None
+        size_hint_y: None
         width: dp(200)
-        height: dp(90)
+        height: dp(40)
         pos_hint: {"center_x": 0.5}
 
+
+
     VersionWidget:
-
-    Widget:
-
 
 
 
@@ -73,7 +88,7 @@
         Button:
             text: "v0.1"
             font_size: '10sp'
-            on_press: print("Button-Label was pressed!")
+            on_press: app.open_about_popup()
             size_hint: None, None
             padding: (dp(5), dp(5))
             color: 1 ,1 , 1 , 0.5
@@ -82,18 +97,30 @@
             background_color: (0, 0, 0, 0) # Transparent
             background_normal: ''
             background_down: ''
-
+            underline: True
+            color: 20 / 255, 147 / 255, 233 / 255, 1
 
 <AboutPopup@Popup>:
+    id: about_popup
     title: 'About This App'
-    size_hint: 0.6, 0.4
+    size_hint: 0.6, 0.8
     BoxLayout:
         orientation: 'vertical'
         padding: dp(10)
         Label:
-            text: 'After struggling to copy and paste the latest version of my project files, I decided to create this app to simplify the process.'
-            font_size: '20sp'
+            text: 'After struggling to copy and paste the latest version of my project files, I decided to create this app to simplify the process. If you have any feedback or suggestions, please let me know!'
+            font_size: '14sp'
+            text_size: self.width, None
+            size_hint_y: None
+            height: self.texture_size[1]
         Label:
             text: 'Version 0.1'
+        Label:
+            text: '[ref=https://github.com//GiuseppeS]Github[/ref]'
+            markup: True
+            on_ref_press: app.open_link(args[1])
+            underline: True
+            color: 20 / 255, 147 / 255, 233 / 255, 1
+
         Label:
             text: '(c) 2025 Giuseppe Sposito'
